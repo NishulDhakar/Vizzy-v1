@@ -288,3 +288,8 @@ input:focus {
   outline: none !important;
   box-shadow: none !important;
 }
+
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
