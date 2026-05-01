@@ -69,5 +69,3 @@ function GoogleIcon() {
     </svg>
   );
 }
-);
-}
