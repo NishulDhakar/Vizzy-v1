@@ -416,7 +416,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
               <IconChevronDown size={14} />
             </button>
           </div>
-          <div className="flex items-center gap-1.5 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0 hidden">
             <button className="hidden sm:block px-3 py-[6px] rounded-[8px] bg-(--vz-bg-2) border border-(--vz-line-strong) text-(--vz-fg-0) text-[12.5px] font-medium hover:bg-(--vz-bg-3) transition-colors cursor-pointer">Share</button>
             <button className="w-[30px] h-[30px] grid place-items-center rounded-[8px] bg-transparent border border-(--vz-line) text-(--vz-fg-1) hover:bg-(--vz-bg-2) transition-colors cursor-pointer">
               <IconDots size={16} />

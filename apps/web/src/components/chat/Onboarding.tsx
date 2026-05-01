@@ -26,12 +26,12 @@ const HOME_SUGGESTIONS = [
 ];
 
 const BIZ_SUGGESTIONS = [
-  { t: 'Pitch deck cover slides',     k: 'deck',   thumb: 'stripes-cool',   icon: '▤', img: '/suggestions/deck.jpg' },
-  { t: 'Brand color exploration',     k: 'brand',  thumb: 'stripes-violet', icon: '◐', img: '/suggestions/brand.jpg' },
-  { t: 'Product hero shot ideas',     k: 'hero',   thumb: 'stripes',        icon: '◇', img: '/suggestions/hero.jpg' },
-  { t: 'Social posts from a launch',  k: 'social', thumb: 'stripes-warm',   icon: '▦', img: '/suggestions/social.jpg' },
-  { t: 'Logo mark variations',        k: 'logo',   thumb: 'stripes-violet', icon: '✦', img: '/suggestions/logo.jpg' },
-  { t: 'Editorial illustration',      k: 'edit',   thumb: 'stripes-cool',   icon: '❡', img: '/suggestions/edit.jpg' },
+  { t: 'Pitch deck cover slides',     k: 'deck',   thumb: 'stripes-cool',   icon: '▤', img: '/logo.png' },
+  { t: 'Brand color exploration',     k: 'brand',  thumb: 'stripes-violet', icon: '◐', img: '/logo.png' },
+  { t: 'Product hero shot ideas',     k: 'hero',   thumb: 'stripes',        icon: '◇', img: '/logo.png' },
+  { t: 'Social posts from a launch',  k: 'social', thumb: 'stripes-warm',   icon: '▦', img: '/logo.png' },
+  { t: 'Logo mark variations',        k: 'logo',   thumb: 'stripes-violet', icon: '✦', img: '/logo.png' },
+  { t: 'Editorial illustration',      k: 'edit',   thumb: 'stripes-cool',   icon: '❡', img: '/logo.png' },
 ];
 
 const RECENTS_STATIC = [
