@@ -8,9 +8,18 @@ export default function LoginPage() {
   const { signInWithGoogle } = useAuth();
 
   return (
-    <div className="min-h-screen bg-[var(--vz-bg-0)] flex items-center justify-center px-4">
-      <div className="flex flex-col items-center gap-8 w-full max-w-[340px]">
-
+    <div className="relative min-h-screen bg-(--vz-bg-0) flex items-center justify-center px-4 overflow-hidden">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="none"
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260330_145725_08886141-ed95-4a8e-8d6d-b75eaadce638.mp4"
+      />
+      <div className="flex flex-col items-center gap-8 w-full max-w-[340px] relative z-10">
+       
         {/* Logo */}
         <div className="flex flex-col items-center gap-3">
           <Image src="/logo.png" alt="Vizzy logo" width={32} height={32} className="rounded-[6px]" />
@@ -59,4 +68,6 @@ function GoogleIcon() {
       <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
     </svg>
   );
+}
+);
 }

@@ -6,6 +6,7 @@ from services.db import (
     save_message,
     retrieve_memories,
     save_memory,
+    upsert_memory,
     list_memories,
     list_conversations,
     delete_memory,
@@ -39,7 +40,7 @@ class MemoryRequest(BaseModel):
 # ── Background task: extract and save long-term facts ─────────────────────────
 
 def _extract_and_save_memory(user_id: str, user_message: str, ai_response: str) -> None:
-    """Ask the LLM to pull out any personal facts worth remembering, then save them."""
+    """Extract personal facts from the exchange and upsert them into long-term memory."""
     if not user_id:
         return
     try:
@@ -49,27 +50,35 @@ def _extract_and_save_memory(user_id: str, user_message: str, ai_response: str) 
                 {
                     "role": "system",
                     "content": (
-                        "Extract any personal facts about the user from their message "
-                        "(e.g. name, occupation, preferences, style). "
-                        'Return a JSON array of short strings like ["User likes minimalist design"]. '
-                        "Return [] if there is nothing worth remembering long-term."
+                        "You extract memorable personal facts from chat exchanges for long-term personalization.\n"
+                        "Extract ONLY facts that are stable and reusable across future conversations:\n"
+                        "  • Name, age, location\n"
+                        "  • Job, role, industry\n"
+                        "  • Creative style, aesthetic preferences\n"
+                        "  • Hobbies, passions, ongoing projects\n"
+                        "  • Important personal context\n\n"
+                        "Rules:\n"
+                        "  • Each fact starts with 'User', e.g. 'User is a product designer'\n"
+                        "  • Be concise — one fact per item, max ~12 words\n"
+                        "  • Return a JSON array of strings. Return [] if nothing worth saving.\n"
+                        "  • Max 3 facts."
                     ),
                 },
                 {
                     "role": "user",
-                    "content": f"User said: {user_message}\nAI replied: {ai_response}",
+                    "content": f"User: {user_message}\nAI: {ai_response}",
                 },
             ],
             temperature=0,
-            max_tokens=256,
+            max_tokens=200,
         )
         raw = extraction.choices[0].message.content.strip()
-        # Strip markdown code fences if present
         if raw.startswith("```"):
             raw = raw.split("```")[1].lstrip("json").strip()
         facts: list[str] = json.loads(raw)
         for fact in facts[:3]:
-            save_memory(user_id, str(fact))
+            if isinstance(fact, str) and fact.strip():
+                upsert_memory(user_id, fact.strip())
     except Exception:
         pass
 

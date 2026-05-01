@@ -279,7 +279,7 @@ export function DCSection({ id, title, subtitle, children, gap = 48 }: any) {
             label={(sec.labels || {})[k] ?? byId[k].props.label}
             onRename={(v: string) => ctx && ctx.patchSection(sid, (x: any) => ({ labels: { ...x.labels, [k]: v } }))}
             onReorder={(next: string[]) => ctx && ctx.patchSection(sid, { order: next })}
-            onFocus={() => ctx && ctx.setFocus(`${sid}/${k}`)} />
+             />
         ))}
       </div>
       {rest}
@@ -289,7 +289,7 @@ export function DCSection({ id, title, subtitle, children, gap = 48 }: any) {
 
 export function DCArtboard(_props: any) { return null; }
 
-function DCArtboardFrame({ sectionId, artboard, label, order, onRename, onReorder, onFocus }: any) {
+function DCArtboardFrame({ sectionId, artboard, label, order, onRename, onReorder }: any) {
   const { id: rawId, label: rawLabel, width = 260, height = 480, children, style = {} } = artboard.props;
   const id = rawId ?? rawLabel;
   const ref = useRef<HTMLDivElement>(null);
@@ -355,12 +355,12 @@ function DCArtboardFrame({ sectionId, artboard, label, order, onRename, onReorde
         <div className="dc-grip" onPointerDown={onGripDown} title="Drag to reorder">
           <svg width="9" height="13" viewBox="0 0 9 13" fill="currentColor"><circle cx="2" cy="2" r="1.1"/><circle cx="7" cy="2" r="1.1"/><circle cx="2" cy="6.5" r="1.1"/><circle cx="7" cy="6.5" r="1.1"/><circle cx="2" cy="11" r="1.1"/><circle cx="7" cy="11" r="1.1"/></svg>
         </div>
-        <div className="dc-labeltext" onClick={onFocus} title="Click to focus">
+        <div className="dc-labeltext"  title="Click to focus">
           <DCEditable value={label} onChange={onRename} onClick={(e: any) => e.stopPropagation()}
             style={{ fontSize: 15, fontWeight: 500, color: DC.label, lineHeight: 1 }} />
         </div>
       </div>
-      <button className="dc-expand" onClick={onFocus} onPointerDown={(e) => e.stopPropagation()} title="Focus">
+      <button className="dc-expand" onPointerDown={(e) => e.stopPropagation()} title="Focus">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M7 1h4v4M5 11H1V7M11 1L7.5 4.5M1 11l3.5-3.5"/></svg>
       </button>
       <div className="dc-card"

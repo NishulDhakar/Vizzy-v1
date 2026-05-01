@@ -101,13 +101,43 @@ def save_memory(user_id: str, content: str) -> None:
         pass
 
 
+def upsert_memory(user_id: str, content: str) -> None:
+    """Save a memory, updating an existing one if a near-duplicate already exists.
+
+    Cosine similarity > 0.88 → same concept, update in place.
+    Below that → genuinely new fact, insert.
+    """
+    if not user_id:
+        return
+    try:
+        embedding = embed(content)
+        hit = supabase.rpc(
+            "match_memories",
+            {
+                "query_embedding": embedding,
+                "match_user_id": user_id,
+                "match_count": 1,
+            },
+        ).execute()
+        if hit.data and hit.data[0]["similarity"] > 0.88:
+            supabase.table("memories").update(
+                {"content": content, "embedding": embedding}
+            ).eq("id", hit.data[0]["id"]).execute()
+        else:
+            supabase.table("memories").insert(
+                {"user_id": user_id, "content": content, "embedding": embedding}
+            ).execute()
+    except Exception:
+        pass
+
+
 @_retried
 def list_memories(user_id: str) -> List[Dict]:
     result = (
         supabase.table("memories")
-        .select("id, content, created_at")
+        .select("id, content, created_at, updated_at")
         .eq("user_id", user_id)
-        .order("created_at", desc=True)
+        .order("updated_at", desc=True)
         .execute()
     )
     return result.data

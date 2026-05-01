@@ -1,4 +1,4 @@
-.PHONY: dev dev-api dev-web install install-api install-web build lint
+.PHONY: dev dev-api dev-web install install-api install-web build lint clean
 
 # Start both services in parallel
 dev:
@@ -24,3 +24,6 @@ build:
 
 lint:
 	cd apps/web && npm run lint
+
+clean:
+	rm -rf apps/web/.next apps/web/node_modules apps/api/__pycache__ apps/api/**/__pycache__
