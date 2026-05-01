@@ -406,7 +406,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
           <div className="flex items-center gap-2 min-w-0">
             {/* Mobile sidebar toggle */}
             <button
-              className="w-8 h-8 flex items-center justify-center rounded-[8px] text-(--vz-fg-2) hover:bg-(--vz-bg-2) transition-colors border-none bg-transparent cursor-pointer shrink-0"
+              className=" md:hidden w-8 h-8 flex items-center justify-center rounded-[8px] text-(--vz-fg-2) hover:bg-(--vz-bg-2) transition-colors border-none bg-transparent cursor-pointer shrink-0"
               onClick={() => setSidebarOpen(true)}
             >
               <IconSidebar size={17} />

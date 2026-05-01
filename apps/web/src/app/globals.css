@@ -283,3 +283,8 @@ body {
     @apply font-sans;
   }
 }
+
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

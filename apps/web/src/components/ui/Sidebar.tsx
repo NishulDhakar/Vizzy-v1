@@ -102,6 +102,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [search, setSearch] = useState('');
   const { user, signOut } = useAuth();
+  
 
   const filtered = search.trim()
     ? conversations.filter(c => c.title.toLowerCase().includes(search.toLowerCase()))
@@ -125,14 +126,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
       )}
 
       <aside className={`
-        fixed inset-y-0 left-0 z-50 h-full
-        md:relative md:inset-auto md:z-auto md:translate-x-0
-        w-[280px] md:w-[232px] shrink-0
-        flex flex-col
-        bg-[var(--vz-bg-1)] border-r border-[var(--vz-line)] overflow-hidden
-        transition-transform duration-300 ease-out
-        ${open ? 'translate-x-0' : '-translate-x-full'}
-      `}>
+  fixed inset-y-0 left-0 z-50 h-full
+  md:relative md:inset-auto md:z-auto
+  w-[280px] md:w-[232px] shrink-0
+  flex flex-col
+  bg-[var(--vz-bg-1)] border-r border-[var(--vz-line)] overflow-hidden
+  transition-transform duration-300 ease-out
+  ${open ? 'translate-x-0' : '-translate-x-full'}
+`}>
         {/* Brand */}
         <div className="flex items-center justify-between px-4 pt-5 pb-4 border-b border-[var(--vz-line)]">
           <div className="flex items-center gap-2.5">
@@ -158,13 +159,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </svg>
           </button>
           {/* Collapse button — desktop only */}
-          <button onClick={onClose} className="hidden md:flex w-7 h-7 items-center justify-center rounded-[6px] text-[var(--vz-fg-2)] hover:bg-[var(--vz-bg-3)] hover:text-[var(--vz-fg-0)] transition-colors border border-transparent hover:border-[var(--vz-line-strong)] cursor-pointer">
+          {/* <button onClick={onClose} className="hidden md:flex w-7 h-7 items-center justify-center rounded-[6px] text-[var(--vz-fg-2)] hover:bg-[var(--vz-bg-3)] hover:text-[var(--vz-fg-0)] transition-colors border border-transparent hover:border-[var(--vz-line-strong)] cursor-pointer">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="2" y="3" width="12" height="1.5" rx="0.75" />
               <rect x="2" y="7.25" width="8" height="1.5" rx="0.75" />
               <rect x="2" y="11.5" width="10" height="1.5" rx="0.75" />
             </svg>
-          </button>
+          </button> */}
         </div>
 
         {/* New Chat */}
