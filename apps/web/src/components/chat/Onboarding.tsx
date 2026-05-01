@@ -17,12 +17,12 @@ interface OnboardingProps {
 }
 
 const HOME_SUGGESTIONS = [
-  { t: 'Paint my last year\'s feeling', k: 'mood',   thumb: 'stripes-violet',  img: '/suggestions/mood.png' },
-  { t: 'Turn photo into artwork',       k: 'photo',  thumb: 'stripes-cool',    img: '/suggestions/photo.png' },
-  { t: 'Make a vision board',           k: 'board',  thumb: 'stripes',         img: '/suggestions/board.png' },
-  { t: 'Generate a story visual',       k: 'story',  thumb: 'stripes-warm',    img: '/suggestions/story.png' },
-  { t: 'Design a tattoo concept',       k: 'tattoo', thumb: 'stripes',         img: '/suggestions/tattoo.png' },
-  { t: 'Album cover from a song',       k: 'album',  thumb: 'stripes-violet',  img: '/suggestions/album.png' },
+  { t: 'Paint my last year\'s feeling', k: 'mood',   thumb: 'stripes-violet', icon: '',  img: '/suggestions/mood.png' },
+  { t: 'Turn photo into artwork',       k: 'photo',  thumb: 'stripes-cool',   icon: '',  img: '/suggestions/photo.png' },
+  { t: 'Make a vision board',           k: 'board',  thumb: 'stripes',        icon: '',  img: '/suggestions/board.png' },
+  { t: 'Generate a story visual',       k: 'story',  thumb: 'stripes-warm',   icon: '',  img: '/suggestions/story.png' },
+  { t: 'Design a tattoo concept',       k: 'tattoo', thumb: 'stripes',        icon: '',  img: '/suggestions/tattoo.png' },
+  { t: 'Album cover from a song',       k: 'album',  thumb: 'stripes-violet', icon: '',  img: '/suggestions/album.png' },
 ];
 
 const BIZ_SUGGESTIONS = [
@@ -174,9 +174,11 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.55)] via-transparent to-transparent" />
-                  <span className="relative text-[28px] font-[var(--vz-font-display)] text-[rgba(255,255,255,0.85)]">
-                    {s.icon}
-                  </span>
+                  {s.icon && (
+                    <span className="relative text-[28px] font-(--vz-font-display) text-[rgba(255,255,255,0.85)]">
+                      {s.icon}
+                    </span>
+                  )}
                   <span className="vz-placeholder-label absolute bottom-2 left-2.5">{s.k}</span>
                 </div>
                 <div className="flex items-center justify-between px-3.5 py-3">
