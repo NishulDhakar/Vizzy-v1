@@ -150,7 +150,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
   const [composerText, setComposerText]     = useState('');
   const [imageCount, setImageCount]         = useState(4);
   const [aspectRatio, setAspectRatio]       = useState('1:1');
-  const [expandedImage, setExpandedImage]   = useState<GridImage | null>(null);
+  const [expandedImage, setExpandedImage]   = useState<{ image: GridImage; allImages: GridImage[] } | null>(null);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(() => {
     const activeTargetId = initialConvId ?? lsGet<string | null>(LS_ACTIVE, null);
@@ -473,7 +473,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
                     <ImageGrid
                       caption={msg.imageLoading ? 'generating variations…' : `${msg.images.length} results · prompt v${Math.ceil((idx + 1) / 2)}`}
                       generating={msg.imageLoading} images={msg.images}
-                      onImageClick={(img) => setExpandedImage(img)}
+                      onImageClick={(img) => setExpandedImage({ image: img, allImages: msg.images! })}
                     />
                   )}
                   {msg.searchResults && msg.searchResults.length > 0 && (
@@ -510,7 +510,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
         </footer>
       </main>
 
-      {expandedImage && <ImageResult image={expandedImage} onClose={() => setExpandedImage(null)} />}
+      {expandedImage && <ImageResult image={expandedImage.image} allImages={expandedImage.allImages} onClose={() => setExpandedImage(null)} />}
     </div>
   );
 };

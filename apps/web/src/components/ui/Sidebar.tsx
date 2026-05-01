@@ -127,7 +127,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       <aside className={`
   fixed inset-y-0 left-0 z-50 h-full
-  md:relative md:inset-auto md:z-auto
+  md:relative md:inset-auto md:z-auto md:translate-x-0
   w-[280px] md:w-[232px] shrink-0
   flex flex-col
   bg-[var(--vz-bg-1)] border-r border-[var(--vz-line)] overflow-hidden

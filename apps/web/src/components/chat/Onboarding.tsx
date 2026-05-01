@@ -17,21 +17,21 @@ interface OnboardingProps {
 }
 
 const HOME_SUGGESTIONS = [
-  { t: 'Paint my last year\'s feeling', k: 'mood',   thumb: 'stripes-violet', icon: '✦' },
-  { t: 'Turn photo into artwork',       k: 'photo',  thumb: 'stripes-cool',   icon: '◐' },
-  { t: 'Make a vision board',           k: 'board',  thumb: 'stripes',        icon: '▦' },
-  { t: 'Generate a story visual',       k: 'story',  thumb: 'stripes-warm',   icon: '❡' },
-  { t: 'Design a tattoo concept',       k: 'tattoo', thumb: 'stripes',        icon: '✸' },
-  { t: 'Album cover from a song',       k: 'album',  thumb: 'stripes-violet', icon: '◉' },
+  { t: 'Paint my last year\'s feeling', k: 'mood',   thumb: 'stripes-violet',  img: '/suggestions/mood.png' },
+  { t: 'Turn photo into artwork',       k: 'photo',  thumb: 'stripes-cool',    img: '/suggestions/photo.png' },
+  { t: 'Make a vision board',           k: 'board',  thumb: 'stripes',         img: '/suggestions/board.png' },
+  { t: 'Generate a story visual',       k: 'story',  thumb: 'stripes-warm',    img: '/suggestions/story.png' },
+  { t: 'Design a tattoo concept',       k: 'tattoo', thumb: 'stripes',         img: '/suggestions/tattoo.png' },
+  { t: 'Album cover from a song',       k: 'album',  thumb: 'stripes-violet',  img: '/suggestions/album.png' },
 ];
 
 const BIZ_SUGGESTIONS = [
-  { t: 'Pitch deck cover slides',     k: 'deck',   thumb: 'stripes-cool',   icon: '▤' },
-  { t: 'Brand color exploration',     k: 'brand',  thumb: 'stripes-violet', icon: '◐' },
-  { t: 'Product hero shot ideas',     k: 'hero',   thumb: 'stripes',        icon: '◇' },
-  { t: 'Social posts from a launch',  k: 'social', thumb: 'stripes-warm',   icon: '▦' },
-  { t: 'Logo mark variations',        k: 'logo',   thumb: 'stripes-violet', icon: '✦' },
-  { t: 'Editorial illustration',      k: 'edit',   thumb: 'stripes-cool',   icon: '❡' },
+  { t: 'Pitch deck cover slides',     k: 'deck',   thumb: 'stripes-cool',   icon: '▤', img: '/suggestions/deck.jpg' },
+  { t: 'Brand color exploration',     k: 'brand',  thumb: 'stripes-violet', icon: '◐', img: '/suggestions/brand.jpg' },
+  { t: 'Product hero shot ideas',     k: 'hero',   thumb: 'stripes',        icon: '◇', img: '/suggestions/hero.jpg' },
+  { t: 'Social posts from a launch',  k: 'social', thumb: 'stripes-warm',   icon: '▦', img: '/suggestions/social.jpg' },
+  { t: 'Logo mark variations',        k: 'logo',   thumb: 'stripes-violet', icon: '✦', img: '/suggestions/logo.jpg' },
+  { t: 'Editorial illustration',      k: 'edit',   thumb: 'stripes-cool',   icon: '❡', img: '/suggestions/edit.jpg' },
 ];
 
 const RECENTS_STATIC = [
@@ -164,8 +164,17 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
                 onClick={() => onSend?.(s.t)}
                 className="flex flex-col bg-[var(--vz-bg-2)] border border-[var(--vz-line)] rounded-[14px] overflow-hidden cursor-pointer text-left font-[var(--vz-font-body)] hover:border-[var(--vz-line-strong)] hover:-translate-y-px transition-all duration-150 p-0"
               >
-                <div className={`vz-${s.thumb} h-[100px] relative flex items-center justify-center border-b border-[var(--vz-line)]`}>
-                  <span className="text-[28px] font-[var(--vz-font-display)] text-[rgba(255,255,255,0.55)]">
+                <div className={`${s.img ? '' : `vz-${s.thumb}`} h-[100px] relative flex items-center justify-center border-b border-[var(--vz-line)] overflow-hidden`}>
+                  {s.img && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={s.img}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.55)] via-transparent to-transparent" />
+                  <span className="relative text-[28px] font-[var(--vz-font-display)] text-[rgba(255,255,255,0.85)]">
                     {s.icon}
                   </span>
                   <span className="vz-placeholder-label absolute bottom-2 left-2.5">{s.k}</span>
@@ -180,7 +189,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
         </section>
 
         {/* Recents */}
-        <section className="relative z-10 max-w-[1080px] mx-auto px-4 sm:px-6 md:px-8 pb-10">
+        {/* <section className="relative z-10 max-w-[1080px] mx-auto px-4 sm:px-6 md:px-8 pb-10">
           <div className="flex items-baseline justify-between mb-3.5">
             <h2 className="font-[var(--vz-font-display)] text-[15px] font-medium tracking-[-0.005em] text-[var(--vz-fg-0)] m-0">
               {hasRealRecents ? 'Pick up where you left off' : 'Example creations'}
@@ -224,7 +233,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
                   </button>
                 ))}
           </div>
-        </section>
+        </section> */}
       </main>
     </div>
   );

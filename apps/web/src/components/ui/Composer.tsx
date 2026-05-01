@@ -231,7 +231,7 @@ export const Composer: React.FC<ComposerProps> = ({
             <IconPaperclip size={14} />
           </button>
 
-          <button
+          {/* <button
             onClick={cycleImageCount}
             title="Number of images to generate"
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[7px] text-[var(--vz-fg-2)] hover:bg-[var(--vz-bg-3)] hover:text-[var(--vz-fg-0)] transition-colors text-[12px] cursor-pointer"
@@ -239,7 +239,7 @@ export const Composer: React.FC<ComposerProps> = ({
             <IconImage size={14} />
             <span className="font-medium hidden sm:inline">Image · {imageCount}</span>
             <span className="font-mono sm:hidden">{imageCount}</span>
-          </button>
+          </button> */}
 
           {/* <button
             onClick={cycleAspectRatio}
