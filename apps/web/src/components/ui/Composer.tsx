@@ -203,20 +203,20 @@ export const Composer: React.FC<ComposerProps> = ({
 
       {/* Text area */}
       <div className="px-4 pt-3 pb-2">
-        <textarea
-          value={text}
-          onChange={handleChange}
-          placeholder={transcribing ? 'Transcribing voice…' : placeholder}
-          rows={2}
-          disabled={disabled || transcribing}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSend();
-            }
-          }}
-          className="w-full bg-transparent border-none outline-none resize-none text-[15px] leading-[1.45] text-[var(--vz-fg-0)] placeholder:text-[var(--vz-fg-2)] font-[var(--vz-font-body)]"
-        />
+<textarea
+  value={text}
+  onChange={handleChange}
+  placeholder={transcribing ? 'Transcribing voice…' : placeholder}
+  rows={2}
+  disabled={disabled || transcribing}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  }}
+  className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-none focus:shadow-none resize-none text-[15px] leading-[1.45] text-[var(--vz-fg-0)] placeholder:text-[var(--vz-fg-2)] font-[var(--vz-font-body)]"
+/>
       </div>
 
       {/* Toolbar */}
