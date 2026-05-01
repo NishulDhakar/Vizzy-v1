@@ -4,6 +4,14 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { User, Session } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase';
 
+// Lazy singleton — never created during SSR/prerender.
+// Only initialised the first time useEffect or an event handler calls getClient().
+let _client: ReturnType<typeof createClient> | null = null;
+function getClient() {
+  if (!_client) _client = createClient();
+  return _client;
+}
+
 interface AuthContextValue {
   user: User | null;
   session: Session | null;
@@ -21,9 +29,10 @@ const AuthContext = createContext<AuthContextValue>({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const supabase = createClient();
 
   useEffect(() => {
+    const supabase = getClient();
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
@@ -35,11 +44,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
 
     return () => subscription.unsubscribe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
+    await getClient().auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
@@ -48,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    await getClient().auth.signOut();
     window.location.href = '/auth/login';
   };
 
