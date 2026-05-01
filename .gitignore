@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node
+node_modules/
+npm-debug.log*
+.npm
+
+# Next.js
+apps/web/.next/
+apps/web/out/
+apps/web/build/
+
+# Python
+apps/api/venv/
+apps/api/__pycache__/
+apps/api/**/__pycache__/
+apps/api/**/*.pyc
+apps/api/.pytest_cache/
+
+# Turbo
+.turbo/
+
+# Env files (keep .env.example)
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+*.log
