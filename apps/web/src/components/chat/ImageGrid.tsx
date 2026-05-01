@@ -236,7 +236,7 @@ export const ImageGrid: React.FC<ImageGridProps> = ({ images, caption, generatin
           <span className="font-mono text-[10.5px] text-vz-fg-2 animate-[vzBlink_1s_step-end_infinite]">●</span>
         </div>
       ) : (
-        <div className="flex items-center gap-1.5 px-3 py-2.5 border-t border-(--vz-line)">
+        <div className="flex flex-wrap items-center gap-1.5 px-3 py-2.5 border-t border-(--vz-line)">
           {[
             { icon: <IconRefresh size={12} />, label: 'Regenerate all' },
             { icon: <IconWand size={12} />, label: 'Refine prompt' },
@@ -247,7 +247,7 @@ export const ImageGrid: React.FC<ImageGridProps> = ({ images, caption, generatin
               className="flex items-center gap-1.5 px-2.5 py-1.25 rounded-[7px] bg-vz-bg-2 border border-(--vz-line) text-vz-fg-1 hover:text-(--vz-fg-0) hover:bg-vz-bg-3 transition-colors text-[11.5px] font-(--vz-font-body) cursor-pointer"
             >
               {b.icon}
-              {b.label}
+              <span className="hidden sm:inline">{b.label}</span>
             </button>
           ))}
           <span className="flex-1" />

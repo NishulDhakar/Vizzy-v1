@@ -237,7 +237,8 @@ export const Composer: React.FC<ComposerProps> = ({
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[7px] text-[var(--vz-fg-2)] hover:bg-[var(--vz-bg-3)] hover:text-[var(--vz-fg-0)] transition-colors text-[12px] cursor-pointer"
           >
             <IconImage size={14} />
-            <span className="font-medium">Image · {imageCount}</span>
+            <span className="font-medium hidden sm:inline">Image · {imageCount}</span>
+            <span className="font-mono sm:hidden">{imageCount}</span>
           </button>
 
           {/* <button
@@ -283,8 +284,8 @@ export const Composer: React.FC<ComposerProps> = ({
         </div>
       </div>
 
-      {/* Status bar */}
-      <div className="flex items-center justify-between px-4 py-1.5 border-t border-[var(--vz-line)] bg-[var(--vz-bg-2)]">
+      {/* Status bar — hidden on mobile */}
+      <div className="hidden sm:flex items-center justify-between px-4 py-1.5 border-t border-[var(--vz-line)] bg-[var(--vz-bg-2)]">
         <div className="flex items-center gap-3 text-[10.5px] font-mono text-[var(--vz-fg-3)]">
           <span><kbd className="opacity-60">↵</kbd> send</span>
           <span><kbd className="opacity-60">⇧↵</kbd> new line</span>

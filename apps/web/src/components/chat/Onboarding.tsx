@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Sidebar } from '../ui/Sidebar';
 import { Composer } from '../ui/Composer';
-import { IconHome, IconBriefcase } from '../ui/Icons';
+import { IconHome, IconBriefcase, IconSidebar } from '../ui/Icons';
 import { Conversation } from './ChatApp';
 import Image from 'next/image';
 
@@ -47,6 +47,7 @@ function formatDate(d: Date) {
 
 export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, onSelectConv, onNewChat, imageCount, onImageCountChange }) => {
   const [mode, setMode] = useState<'Home' | 'Business'>('Home');
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768);
 
   const suggestions = mode === 'Home' ? HOME_SUGGESTIONS : BIZ_SUGGESTIONS;
 
@@ -60,6 +61,8 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
         activeId={null}
         onSelect={onSelectConv}
         onNewChat={onNewChat}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
 
       <main className="flex-1 h-full overflow-auto relative bg-[var(--vz-bg-0)]">
@@ -67,10 +70,17 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
         <div className="vz-violet-wash absolute inset-0 pointer-events-none z-0" />
 
         {/* Topbar */}
-        <header className="relative z-10 flex items-center justify-between px-8 py-[18px] border-b border-[var(--vz-line)]">
+        <header className="relative z-10 flex items-center justify-between px-4 md:px-8 py-4 md:py-[18px] border-b border-[var(--vz-line)]">
           <div className="flex items-center gap-2 text-[13px] text-[var(--vz-fg-0)]">
-            <span className="text-[var(--vz-fg-2)]">Workspace</span>
-            <span className="text-[var(--vz-fg-3)]">/</span>
+            {/* Mobile sidebar toggle */}
+            <button
+              className="w-8 h-8 flex items-center justify-center rounded-[8px] text-(--vz-fg-2) hover:bg-(--vz-bg-2) transition-colors border-none bg-transparent cursor-pointer shrink-0"
+              onClick={() => setSidebarOpen(true)}
+            >
+              <IconSidebar size={17} />
+            </button>
+            <span className="hidden sm:inline text-[var(--vz-fg-2)]">Workspace</span>
+            <span className="hidden sm:inline text-[var(--vz-fg-3)]">/</span>
             <span>New chat</span>
           </div>
           {/* Mode toggle */}
@@ -93,7 +103,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
         </header>
 
         {/* Hero */}
-        <section className="relative z-10 max-w-[820px] mx-auto px-8 pt-[72px] pb-12">
+        <section className="relative z-10 max-w-[820px] mx-auto px-4 sm:px-6 md:px-8 pt-10 md:pt-[72px] pb-8 md:pb-12">
           {/* Eyebrow */}
           <div className="flex items-center gap-2.5 font-mono text-[11.5px] text-[var(--vz-fg-2)] uppercase tracking-[0.06em] whitespace-nowrap">
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.66_0.20_295)] shadow-[0_0_8px_oklch(0.66_0.20_295/0.6)]" />
@@ -103,7 +113,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
           </div>
 
           {/* Heading */}
-          <h1 className="font-[var(--vz-font-display)] text-[64px] font-medium leading-[1.02] tracking-[-0.035em] mt-5 mb-[18px] text-[var(--vz-fg-0)]">
+          <h1 className="font-[var(--vz-font-display)] text-[38px] sm:text-[52px] lg:text-[64px] font-medium leading-[1.05] lg:leading-[1.02] tracking-[-0.03em] lg:tracking-[-0.035em] mt-4 md:mt-5 mb-4 md:mb-[18px] text-[var(--vz-fg-0)]">
             What do you want<br />
             to create{' '}
             <em
@@ -119,7 +129,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
             </em>
             ?
           </h1>
-          <p className="text-[16px] text-[var(--vz-fg-1)] leading-[1.5] max-w-[560px] mb-9">
+          <p className="text-[14px] sm:text-[16px] text-[var(--vz-fg-1)] leading-[1.5] max-w-[560px] mb-6 md:mb-9">
             Describe, sketch, or upload. Vizzy turns ideas into images you can refine in conversation.
           </p>
 
@@ -138,7 +148,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
         </section>
 
         {/* Suggestion cards */}
-        <section className="relative z-10 max-w-[1080px] mx-auto px-8 pb-8">
+        <section className="relative z-10 max-w-[1080px] mx-auto px-4 sm:px-6 md:px-8 pb-8">
           <div className="flex items-baseline justify-between mb-3.5">
             <h2 className="font-[var(--vz-font-display)] text-[15px] font-medium tracking-[-0.005em] text-[var(--vz-fg-0)] m-0 whitespace-nowrap">
               Try one of these
@@ -147,7 +157,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
               {mode.toLowerCase()} prompts
             </span>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {suggestions.map(s => (
               <button
                 key={s.k}
@@ -170,7 +180,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
         </section>
 
         {/* Recents */}
-        <section className="relative z-10 max-w-[1080px] mx-auto px-8 pb-10">
+        <section className="relative z-10 max-w-[1080px] mx-auto px-4 sm:px-6 md:px-8 pb-10">
           <div className="flex items-baseline justify-between mb-3.5">
             <h2 className="font-[var(--vz-font-display)] text-[15px] font-medium tracking-[-0.005em] text-[var(--vz-fg-0)] m-0">
               {hasRealRecents ? 'Pick up where you left off' : 'Example creations'}
@@ -181,7 +191,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onSend, conversations, o
               </button>
             )}
           </div>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {hasRealRecents
               ? conversations.slice(0, 4).map(c => (
                   <button

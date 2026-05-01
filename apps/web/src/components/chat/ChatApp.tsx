@@ -5,7 +5,7 @@ import { Sidebar } from '../ui/Sidebar';
 import { Composer } from '../ui/Composer';
 import { MessageUser, MessageAi } from './Messages';
 import { ImageGrid, GridImage } from './ImageGrid';
-import { IconChevronDown, IconDots } from '../ui/Icons';
+import { IconChevronDown, IconDots, IconSidebar } from '../ui/Icons';
 import { ImageResult } from './ImageResult';
 import { Onboarding } from './Onboarding';
 import { DotmSquare18 } from '../ui/dotm-square-18';
@@ -146,6 +146,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
     useLocalStorage<string | null>(LS_ACTIVE, null);
   const [activeId, setActiveId] = useState<string | null>(initialConvId ?? storedActiveId);
 
+  const [sidebarOpen, setSidebarOpen]       = useState(() => window.innerWidth >= 768);
   const [composerText, setComposerText]     = useState('');
   const [imageCount, setImageCount]         = useState(4);
   const [aspectRatio, setAspectRatio]       = useState('1:1');
@@ -390,26 +391,41 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
 
   return (
     <div className="vz-screen flex relative">
-      <Sidebar conversations={conversations} activeId={activeId} onSelect={handleSelectConv} onNewChat={handleNewChat} onDelete={handleDeleteConv} />
+      <Sidebar
+        conversations={conversations}
+        activeId={activeId}
+        onSelect={handleSelectConv}
+        onNewChat={handleNewChat}
+        onDelete={handleDeleteConv}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
-      <main className="flex-1 h-full flex flex-col bg-[var(--vz-bg-0)] relative min-w-0">
-        <header className="flex items-center justify-between px-7 py-[14px] border-b border-[var(--vz-line)] shrink-0">
-          <div className="flex items-center gap-1.5 min-w-0">
-            <span className="font-[var(--vz-font-display)] text-[14.5px] font-medium text-[var(--vz-fg-0)] tracking-[-0.005em] truncate">{activeConv.title}</span>
-            <button className="shrink-0 w-[22px] h-[22px] grid place-items-center rounded-[6px] text-[var(--vz-fg-2)] hover:text-[var(--vz-fg-0)] hover:bg-[var(--vz-bg-2)] transition-colors border-none bg-transparent cursor-pointer">
+      <main className="flex-1 h-full flex flex-col bg-(--vz-bg-0) relative min-w-0">
+        <header className="flex items-center justify-between px-4 md:px-7 py-3.5 border-b border-(--vz-line) shrink-0">
+          <div className="flex items-center gap-2 min-w-0">
+            {/* Mobile sidebar toggle */}
+            <button
+              className="w-8 h-8 flex items-center justify-center rounded-[8px] text-(--vz-fg-2) hover:bg-(--vz-bg-2) transition-colors border-none bg-transparent cursor-pointer shrink-0"
+              onClick={() => setSidebarOpen(true)}
+            >
+              <IconSidebar size={17} />
+            </button>
+            <span className="font-(--vz-font-display) text-[14.5px] font-medium text-(--vz-fg-0) tracking-[-0.005em] truncate">{activeConv.title}</span>
+            <button className="shrink-0 w-[22px] h-[22px] grid place-items-center rounded-[6px] text-(--vz-fg-2) hover:text-(--vz-fg-0) hover:bg-(--vz-bg-2) transition-colors border-none bg-transparent cursor-pointer">
               <IconChevronDown size={14} />
             </button>
           </div>
           <div className="flex items-center gap-1.5 shrink-0">
-            <button className="px-3 py-[6px] rounded-[8px] bg-[var(--vz-bg-2)] border border-[var(--vz-line-strong)] text-[var(--vz-fg-0)] text-[12.5px] font-medium hover:bg-[var(--vz-bg-3)] transition-colors cursor-pointer font-[var(--vz-font-body)]">Share</button>
-            <button className="w-[30px] h-[30px] grid place-items-center rounded-[8px] bg-transparent border border-[var(--vz-line)] text-[var(--vz-fg-1)] hover:bg-[var(--vz-bg-2)] transition-colors cursor-pointer">
+            <button className="hidden sm:block px-3 py-[6px] rounded-[8px] bg-(--vz-bg-2) border border-(--vz-line-strong) text-(--vz-fg-0) text-[12.5px] font-medium hover:bg-(--vz-bg-3) transition-colors cursor-pointer">Share</button>
+            <button className="w-[30px] h-[30px] grid place-items-center rounded-[8px] bg-transparent border border-(--vz-line) text-(--vz-fg-1) hover:bg-(--vz-bg-2) transition-colors cursor-pointer">
               <IconDots size={16} />
             </button>
           </div>
         </header>
 
         <div ref={threadRef} className="flex-1 overflow-auto">
-          <div className="max-w-[820px] mx-auto px-8 pt-8 pb-6 flex flex-col gap-7">
+          <div className="max-w-[820px] mx-auto px-4 md:px-8 pt-6 md:pt-8 pb-6 flex flex-col gap-7">
             <div className="flex items-center gap-3">
               <span className="flex-1 h-px bg-[var(--vz-line)]" />
               <span className="font-mono text-[10.5px] text-[var(--vz-fg-2)] uppercase tracking-[0.06em] whitespace-nowrap">
@@ -479,7 +495,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
           </div>
         </div>
 
-        <footer className="shrink-0 px-8 pb-[22px] bg-gradient-to-b from-transparent to-[var(--vz-bg-0)]">
+        <footer className="shrink-0 px-4 md:px-8 pb-4 md:pb-[22px] bg-gradient-to-b from-transparent to-(--vz-bg-0)">
           <div className="max-w-[820px] mx-auto">
             <Composer
               value={composerText} onChange={setComposerText}

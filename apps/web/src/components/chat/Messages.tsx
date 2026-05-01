@@ -10,7 +10,7 @@ export const MessageUser: React.FC<{
   files?: UploadedFile[];
 }> = ({ children, files }) => (
   <div className="flex justify-end">
-    <div className="max-w-[78%] bg-[var(--vz-user-bubble)] border border-[rgba(255,255,255,0.08)] rounded-2xl px-4 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+    <div className="max-w-[92%] sm:max-w-[78%] bg-[var(--vz-user-bubble)] border border-[rgba(255,255,255,0.08)] rounded-2xl px-4 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
       {/* File / image attachments */}
       {files && files.length > 0 && (
         <div className="flex gap-2 mb-2.5 flex-wrap">
