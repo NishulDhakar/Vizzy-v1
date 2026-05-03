@@ -1,24 +1,18 @@
-import requests
-import os
+import hashlib
+import math
 
-HF_TOKEN = os.getenv("HF_TOKEN")
-
-API_URL = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
-
-HEADERS = {
-    "Authorization": f"Bearer {HF_TOKEN}"
-}
-
-def embed(text: str) -> list[float]:
+def embed(text: str, dim: int = 384) -> list[float]:
     if not text.strip():
         return []
 
-    try:
-        res = requests.post(API_URL, headers=HEADERS, json={"inputs": text})
-        data = res.json()
+    # hash-based pseudo embedding (very light)
+    h = hashlib.sha256(text.encode()).digest()
 
-        return data[0]  # embedding vector
+    # convert bytes → numbers
+    vec = [b / 255.0 for b in h]
 
-    except Exception as e:
-        print("Embedding error:", e)
-        return []
+    # repeat to match dimension
+    while len(vec) < dim:
+        vec += vec
+
+    return vec[:dim]
