@@ -148,7 +148,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
 
   const [sidebarOpen, setSidebarOpen]       = useState(() => window.innerWidth >= 768);
   const [composerText, setComposerText]     = useState('');
-  const [imageCount, setImageCount]         = useState(4);
+  const [imageCount, setImageCount]         = useState(1);
   const [aspectRatio, setAspectRatio]       = useState('1:1');
   const [expandedImage, setExpandedImage]   = useState<{ image: GridImage; allImages: GridImage[] } | null>(null);
   const [historyLoading, setHistoryLoading] = useState(false);

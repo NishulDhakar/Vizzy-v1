@@ -23,3 +23,15 @@ def build_graph():
 
 
 graph = build_graph()
+
+
+
+# START
+#   ↓
+# intent_node  → decides: "chat" or "image"
+#   ↓
+#  ┌───────────────┐
+#  ↓               ↓
+# chat_node     image_node
+#  ↓               ↓
+#  END            END

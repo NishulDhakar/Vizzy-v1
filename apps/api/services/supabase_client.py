@@ -5,7 +5,6 @@ import os
 
 load_dotenv()
 
-# Explicit pool so concurrent asyncio.to_thread calls don't race on a single socket
 _http = httpx.Client(
     limits=httpx.Limits(
         max_connections=20,

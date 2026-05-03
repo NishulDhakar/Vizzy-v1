@@ -9,7 +9,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3001", "https://vizzyvone.vercel.app/"],
+    allow_origins=["http://localhost:3001", "https://vizzy-v1.vercel.app/"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
