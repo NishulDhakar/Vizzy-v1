@@ -4,6 +4,27 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html,
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+
 :root {
   /* Surface — cool near-black with violet undertone */
   --vz-bg-0: #0a0a0f;          /* deepest, app bg */
@@ -293,3 +314,4 @@ textarea:focus {
   outline: none !important;
   box-shadow: none !important;
 }
+
