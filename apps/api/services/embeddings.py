@@ -1,25 +1,23 @@
-from sentence_transformers import SentenceTransformer
+import requests
+import os
 
-# Load once (important for performance)
-_model: SentenceTransformer | None = None
+HF_TOKEN = os.getenv("HF_TOKEN")
 
+API_URL = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
 
-def _get_model() -> SentenceTransformer:
-    global _model
-    if _model is None:
-        _model = SentenceTransformer("all-MiniLM-L6-v2")
-    return _model
-
+HEADERS = {
+    "Authorization": f"Bearer {HF_TOKEN}"
+}
 
 def embed(text: str) -> list[float]:
     if not text.strip():
         return []
 
     try:
-        model = _get_model()
-        vector = model.encode(text)
+        res = requests.post(API_URL, headers=HEADERS, json={"inputs": text})
+        data = res.json()
 
-        return vector.tolist()
+        return data[0]  # embedding vector
 
     except Exception as e:
         print("Embedding error:", e)
