@@ -17,15 +17,12 @@ export async function POST(req: NextRequest) {
     // so the frontend receives a readable error message rather than an empty 500.
     return NextResponse.json(data, { status: upstream.status });
   } catch (err) {
-  console.error("CHAT ERROR:", err);
+  console.error("FETCH ERROR:", err);
 
   return NextResponse.json(
     {
-      backend: BACKEND,
-      error:
-        err instanceof Error
-          ? err.message
-          : String(err),
+      error: String(err),
+      backend: BACKEND
     },
     { status: 503 }
   );
