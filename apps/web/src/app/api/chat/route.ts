@@ -17,9 +17,14 @@ export async function POST(req: NextRequest) {
     // so the frontend receives a readable error message rather than an empty 500.
     return NextResponse.json(data, { status: upstream.status });
   } catch (err) {
-    const message = err instanceof Error && err.name === 'TimeoutError'
-      ? 'Request timed out — backend took too long to respond.'
-      : 'Backend unavailable.';
-    return NextResponse.json({ text: message, intent: 'chat', image_urls: [], search_results: [], error: message }, { status: 503 });
-  }
+  console.error("CHAT ERROR:", err);
+
+  return NextResponse.json(
+    {
+      backend: BACKEND,
+      error: String(err),
+    },
+    { status: 503 }
+  );
+}
 }

@@ -20,7 +20,7 @@ services:
     env_file:
       - ./apps/web/.env
     environment:
-      - BACKEND_URL=http://api:8001
+      - NEXT_PUBLIC_API_URL=http://api:8001
     depends_on:
       - api
     volumes:
