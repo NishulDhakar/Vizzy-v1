@@ -22,7 +22,10 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(
     {
       backend: BACKEND,
-      error: String(err),
+      error:
+        err instanceof Error
+          ? err.message
+          : String(err),
     },
     { status: 503 }
   );
