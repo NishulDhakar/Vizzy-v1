@@ -1,14 +1,35 @@
 "use client";
 
-import { useAuth } from '@/context/AuthContext';
-import Image from 'next/image';
+// ============ AUTH DISABLED ============
+// import { useAuth } from '@/context/AuthContext';
+// import Image from 'next/image';
 
 export default function LoginPage() {
-  const { signInWithGoogle } = useAuth();
+  // const { signInWithGoogle } = useAuth();
+
+  // AUTH DISABLED - This page is no longer functional
+  // Users can now access the app without authentication
+  return (
+    <div className="relative min-h-screen bg-[#0a0a0f] flex items-center justify-center px-4 overflow-hidden">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold text-white mb-4">Authentication Disabled</h1>
+        <p className="text-gray-400 mb-6">
+          Authentication has been disabled. Please navigate to the home page to continue.
+        </p>
+        <a href="/" className="text-blue-400 hover:text-blue-300">
+          Go to Home
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/*
+  Original code - commented out due to auth being disabled:
 
   return (
     <div className="relative min-h-screen bg-[#0a0a0f] flex items-center justify-center px-4 overflow-hidden">
-      {/* Immersive background video */}
+      {/* Immersive background video * /}
       <video
         autoPlay
         loop
@@ -19,14 +40,14 @@ export default function LoginPage() {
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260330_145725_08886141-ed95-4a8e-8d6d-b75eaadce638.mp4"
       />
       
-      {/* Elegant dark radial overlay and soft blur to merge video with background */}
+      {/* Elegant dark radial overlay and soft blur to merge video with background * /}
       <div className="absolute inset-0 bg-radial-[at_center] from-black/20 via-[#0a0a0f]/80 to-[#0a0a0f] backdrop-blur-[3px] z-1 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center gap-8 w-full max-w-[350px] animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out">
         
-        {/* Logo & Branding */}
+        {/* Logo & Branding * /}
         <div className="relative flex flex-col items-center gap-3.5">
-          {/* Soft violet accent glow behind the logo */}
+          {/* Soft violet accent glow behind the logo * /}
           <div className="absolute w-28 h-28 rounded-full bg-[var(--vz-accent)] opacity-20 blur-2xl -top-4 pointer-events-none animate-pulse duration-[4000ms]" />
           
           <div className="relative p-2 bg-white/5 border border-white/10 rounded-xl backdrop-blur-md shadow-2xl">
@@ -50,7 +71,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Premium Glassmorphic Card */}
+        {/* Premium Glassmorphic Card * /}
         <div className="w-full bg-[#101019]/40 backdrop-blur-2xl border border-white/5 rounded-2xl p-8 flex flex-col gap-6 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8),_inset_0_1px_1px_rgba(255,255,255,0.05)]">
           <p className="text-[13.5px] text-[var(--vz-fg-1)] text-center leading-relaxed">
             Sign in to generate images, search the web, and save your work.
@@ -71,7 +92,7 @@ export default function LoginPage() {
           </button>
         </div>
 
-        {/* Minimalist footer terms */}
+        {/* Minimalist footer terms * /}
         <p className="text-[10.5px] text-[var(--vz-fg-3)] text-center leading-relaxed px-4 transition-opacity duration-300 hover:text-[var(--vz-fg-2)]">
           By continuing, you agree to Vizzy&apos;s terms of service.
         </p>
@@ -90,4 +111,5 @@ function GoogleIcon() {
     </svg>
   );
 }
-
+*/
+// ========================================

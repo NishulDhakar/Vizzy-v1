@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { IconPlus, IconSearch } from './Icons';
 import Image from 'next/image';
 import { Conversation } from '../chat/ChatApp';
-import { useAuth } from '@/context/AuthContext';
+// ============ AUTH DISABLED ============
+// import { useAuth } from '@/context/AuthContext';
+// ========================================
 
 interface SidebarProps {
   conversations: Conversation[];
@@ -101,7 +103,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
   conversations, activeId, onSelect, onNewChat, onDelete, open = false, onClose,
 }) => {
   const [search, setSearch] = useState('');
-  const { user, signOut } = useAuth();
+  // ============ AUTH DISABLED ============
+  // const { user, signOut } = useAuth();
+  // ========================================
+  const userName = 'User';
+  const userEmail = '';
+  const userAvatarUrl = '';
   
 
   const filtered = search.trim()
@@ -220,9 +227,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* User footer */}
         <div className="px-3 pb-4 pt-2 border-t border-[var(--vz-line)] flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5 min-w-0">
-            {user?.user_metadata?.avatar_url ? (
+            {userAvatarUrl ? (
               <Image
-                src={user.user_metadata.avatar_url}
+                src={userAvatarUrl}
                 alt="avatar"
                 width={28}
                 height={28}
@@ -230,12 +237,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
               />
             ) : (
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[oklch(0.55_0.16_295)] to-[oklch(0.38_0.14_295)] flex items-center justify-center text-white font-semibold text-[11px] shrink-0">
-                {(user?.user_metadata?.name ?? user?.email ?? 'U')[0].toUpperCase()}
+                {(userName || userEmail || 'U')[0].toUpperCase()}
               </div>
             )}
             <div className="min-w-0">
               <div className="text-[12px] font-medium text-[var(--vz-fg-0)] leading-none truncate">
-                {user?.user_metadata?.name ?? user?.email ?? 'User'}
+                {userName || userEmail || 'User'}
               </div>
               <div className="flex items-center gap-1.5 mt-1">
                 <div className="h-[2px] w-[36px] rounded-full bg-[var(--vz-bg-4)] overflow-hidden shrink-0">
@@ -250,6 +257,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
             </div>
           </div>
+          {/* ============ AUTH DISABLED ============
+          Sign out button
           <button
             onClick={signOut}
             title="Sign out"
@@ -261,6 +270,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <line x1="14" y1="8" x2="6" y2="8" />
             </svg>
           </button>
+          ======================================== */}
         </div>
       </aside>
     </>

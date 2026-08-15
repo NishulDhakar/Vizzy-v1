@@ -16,7 +16,9 @@ import {
   deleteConversation,
   SearchResult,
 } from '@/lib/api';
-import { useAuth } from '@/context/AuthContext';
+// ============ AUTH DISABLED ============
+// import { useAuth } from '@/context/AuthContext';
+// ========================================
 import { useLocalStorage, lsGet, lsSet, lsRemove } from '@/lib/useLocalStorage';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -123,8 +125,11 @@ function pushUrl(path: string) {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
-  const { user } = useAuth();
-  const userId = user?.id ?? '';
+  // ============ AUTH DISABLED ============
+  // const { user } = useAuth();
+  // const userId = user?.id ?? '';
+  // ========================================
+  const userId = ''; // Auth disabled - using empty user ID
 
   // vizzy_chats — sidebar list restored from localStorage on first render
   const [storedChats, setStoredChats] = useLocalStorage<StoredChat[]>(LS_CHATS, []);
@@ -331,9 +336,6 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
         message: text,
         conversation_id: convId,
         user_id: userId,
-        user_name: user?.user_metadata?.name ?? '',
-        user_email: user?.email ?? '',
-        user_avatar: user?.user_metadata?.avatar_url ?? '',
         image_count: imageCount,
       });
       const hasImages = response.intent === 'image' && response.image_urls?.length;
@@ -361,7 +363,7 @@ export const ChatApp: React.FC<ChatAppProps> = ({ initialConvId }) => {
       const msg = err instanceof Error ? err.message : 'Something went wrong.';
       patchMsg(convId, aiMsgId, { text: msg, displayText: msg, streaming: false, imageLoading: false, images: undefined, error: true });
     }
-  }, [activeId, userId, user, patchMsg, patchConv]);
+  }, [activeId, userId, imageCount, patchMsg, patchConv]);
 
   // ─── Render ───────────────────────────────────────────────────────────────
 

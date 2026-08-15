@@ -1,3 +1,18 @@
+import { NextResponse, type NextRequest } from 'next/server';
+
+// ============ AUTH DISABLED ============
+// OAuth callback handling disabled
+// This route is no longer functional
+
+export async function GET(request: NextRequest) {
+  // AUTH DISABLED - OAuth callback is disabled
+  // Returning error response
+  return NextResponse.redirect(`${request.nextUrl.origin}/?error=auth_disabled`);
+}
+
+/*
+  Original code - commented out due to auth being disabled:
+
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { NextResponse, type NextRequest } from 'next/server';
@@ -29,3 +44,6 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.redirect(`${origin}/auth/login?error=auth_failed`);
 }
+*/
+// ========================================
+

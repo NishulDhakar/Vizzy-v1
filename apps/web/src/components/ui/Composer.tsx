@@ -4,7 +4,9 @@ import React, { useRef, useState } from 'react';
 import { IconPaperclip, IconImage, IconMic, IconArrowUp, IconClose } from './Icons';
 import { transcribeVoice } from '@/lib/api';
 import { UploadedFile } from '../chat/ChatApp';
-import { useAuth } from '@/context/AuthContext';
+// ============ AUTH DISABLED ============
+// import { useAuth } from '@/context/AuthContext';
+// ========================================
 
 export interface ComposerProps {
   value?: string;
@@ -34,7 +36,12 @@ export const Composer: React.FC<ComposerProps> = ({
   aspectRatio = '1:1',
   onAspectRatioChange,
 }) => {
-  const { user, signInWithGoogle } = useAuth();
+  // ============ AUTH DISABLED ============
+  // const { user, signInWithGoogle } = useAuth();
+  // ========================================
+  const user = null; // Auth disabled - user is always null
+  const signInWithGoogle = async () => console.log('Auth disabled - signInWithGoogle is a no-op');
+  
   const [internalValue, setInternalValue] = useState('');
   const [attachedFiles, setAttachedFiles] = useState<UploadedFile[]>([]);
   const [rawFiles, setRawFiles] = useState<File[]>([]);
@@ -141,7 +148,8 @@ export const Composer: React.FC<ComposerProps> = ({
   return (
     <div className="relative">
 
-    {/* ── Auth gate overlay ─────────────────────────────────────────────────── */}
+    {/* ============ AUTH DISABLED ============
+    Auth gate overlay
     {!user && (
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 rounded-[16px] bg-[var(--vz-bg-1)/0.92] backdrop-blur-[6px] border border-[var(--vz-line-strong)]">
         <div className="flex flex-col items-center gap-1 text-center">
@@ -157,6 +165,7 @@ export const Composer: React.FC<ComposerProps> = ({
         </button>
       </div>
     )}
+    ======================================== */}
 
     <div
       className={`rounded-[16px] bg-[var(--vz-bg-1)] border border-[var(--vz-line-strong)] shadow-[0_8px_24px_rgba(0,0,0,0.35)] overflow-hidden transition-opacity ${
